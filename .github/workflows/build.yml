@@ -22,7 +22,7 @@
             run: pip install buildozer && pip install setuptools && pip install cython
 
           - name: Build APK
-            run: buildozer - v android debug # Or 'release' for a signed APK
+            run: buildozer android debug # Or 'release' for a signed APK
 
           - name: Upload APK artifact
             uses: actions/upload-artifact@v4
