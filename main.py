@@ -1,20 +1,26 @@
-from kivymd.app import MDApp
-from kivy.lang import Builder
+import kivy
+from kivy.app import App
+from kivy.uix.label import Label
 
-kv='''
-MDScreen:
-	md_bg_color: "#238020"
-	MDTopAppBar:
-	MDButton:
-		style: "elevated"
-        pos_hint: {"center_x": .5, "center_y": .5}
-		MDButtonIcon:
-			icon: "plus"
-		MDButtonText:
-			text: "Elevated"
-'''
-class MyApp(MDApp):
-	def build(self):
-		return Builder.load_string(kv)
-		
-MyApp().run()
+
+# Replace this with your 
+# current version
+kivy.require('1.11.1')  
+
+# Defining a class
+class MyFirstKivyApp(App):
+    
+    # Function that returns 
+    # the root widget
+    def build(self):
+        
+        # Label with text Hello World is 
+        # returned as root widget
+        return Label(text ="Hello World !")          
+
+
+# Here our class is initialized
+# and its run() method is called. 
+# This initializes and starts 
+# our Kivy application.
+MyFirstKivyApp().run()
