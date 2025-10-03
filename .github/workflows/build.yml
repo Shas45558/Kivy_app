@@ -27,6 +27,7 @@
               sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev 
               sudo apt-get install libffi-dev
               sudo apt-get install libstdc++6
+              sudo apt-get install libtool
 
           - name: Install Buildozer
             run: pip install buildozer && pip install setuptools && pip install cython
