@@ -19,7 +19,7 @@
               python-version: 3.12
 
           - name: Install Buildozer
-            run: pip install buildozer && pip install setuptools
+            run: pip install buildozer && pip install setuptools && pip install cython
 
           - name: Build APK
             run: buildozer android debug # Or 'release' for a signed APK
