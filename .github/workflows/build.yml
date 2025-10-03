@@ -1,0 +1,31 @@
+    name: Build Kivy APK
+
+    on:
+      push:
+        branches:
+          - main # or your main branch name
+
+    jobs:
+      build-apk:
+        runs-on: ubuntu-latest # Or another suitable runner
+
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@v4
+
+          - name: Set up Python
+            uses: actions/setup-python@v5
+            with:
+              python-version: '3.x' # Specify your Python version
+
+          - name: Install Buildozer
+            run: pip install buildozer
+
+          - name: Build APK
+            run: buildozer android debug # Or 'release' for a signed APK
+
+          - name: Upload APK artifact
+            uses: actions/upload-artifact@v4
+            with:
+              name: Kivy-App-APK
+              path: bin/*.apk # Adjust path if your APK is elsewhere
