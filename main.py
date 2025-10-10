@@ -220,5 +220,5 @@ class TttApp(MDApp):
 
 	def build(self):
 		return Builder.load_string(Kv)
-		
-TttApp().run()
+if __name__ == '__main__':
+    TttApp().run()
