@@ -71,3 +71,8 @@ jobs:
       run: |
         buildozer -v android debug
       shell: bash
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4 # Upload the generated APK as an artifact
+      with:
+        name: package
+        path: ./bin/*.apk # Path to the generated APK
