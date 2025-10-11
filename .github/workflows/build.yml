@@ -14,7 +14,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         architecture: x64
-        python-version: 3.12
+        python-version: 3.8
 
     - name: Setup Java 17 required by Gradle
       uses: actions/setup-java@v4
@@ -70,7 +70,8 @@ jobs:
     - name: Build with Buildozer
       run: |
         buildozer init
-        yes | buildozer -v android debug
+        echo "android.accept_sdk_license = True" >> buildozer.spec
+        buildozer -v android debug
       shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v4 # Upload the generated APK as an artifact
