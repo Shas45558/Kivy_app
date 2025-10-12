@@ -1,7 +1,7 @@
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.uix.button import Button
 
-class HelloWorldApp(App):
+class HelloWorldApp(MDApp):
     def build(self):
         return Button(text='Hello World!')
 
