@@ -1,9 +1,9 @@
 from kivymd.app import MDApp
-from kivy.uix.button import Button
+from kivymd.uix.button import MDButton
 
 class HelloWorldApp(MDApp):
     def build(self):
-        return Button(text='Hello World!')
+        return MDButton()
 
 if __name__ == '__main__':
     HelloWorldApp().run()
