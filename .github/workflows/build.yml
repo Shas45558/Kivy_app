@@ -36,6 +36,8 @@ jobs:
       
     - name: Install and upgrade dependencies
       run: |
+        git clone --depth=1 https://github.com/kivymd/KivyMD.git kivymd
+        ls
         sudo apt update
         sudo apt install -y git \
           zip \
