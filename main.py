@@ -1,15 +1,13 @@
-from kivymd.app import MDApp
+from kivy.app import App
 from kivy.lang import Builder
-from kivymd.uix.floatlayout import MDFloatLayout
+from kivy.uix.floatlayout import FloatLayout
 
 Kv='''
 TTT:
 <TTT>:
-	MDFloatLayout:
-		md_bg_color: "yellow"
-		MDGridLayout:
+	FloatLayout:
+		GridLayout:
 			spacing : "5dp"
-			md_bg_color:"pink"
 			size_hint: .5 , .3
 			pos_hint: {"center_x": .5 ,"center_y": .7}
 			cols:3
@@ -41,44 +39,32 @@ TTT:
 			Button:
 				id:btn9
 				on_release:root.presser(self)
-	MDLabel:
+	Label:
 		id: turn_label
-		md_bg_color:"yellow"
 		pos_hint: {"center_x": .5 ,"center_y": .5}
 		size_hint: .4 ,.05
 		text:"Now X's turn"
 		halign:"center"
-		theme_text_color:"Custom"
-		text_color:"#2596be"
 	Button:
-	    size_hint:.5,.09
+	    size_hint: .5,.09
 	    text:"Reset"
-        style: "filled"
         height: "70dp"
-        theme_bg_color: "Custom"
-        md_bg_color: "red"
         pos_hint: {"center_x": .5, "center_y": .4}
         on_press:root.reset()
-	MDLabel:
+	Label:
 		id: x_win
-		md_bg_color:"yellow"
 		pos_hint: {"center_x": .2 ,"center_y": .3}
 		size_hint: .2 ,.05
 		text:"X Wins: 0"
 		halign:"center"
-		theme_text_color:"Custom"
-		text_color:"#2596be"
-	MDLabel:
+	Label:
 		id: o_win
-		md_bg_color:"yellow"
 		pos_hint: {"center_x": .8 ,"center_y": .3}
 		size_hint: .2 ,.05
 		text:"O Wins: 0"
 		halign:"center"
-		theme_text_color:"Custom"
-		text_color:"#2596be"
 '''
-class TTT(MDFloatLayout):
+class TTT(FloatLayout):
 	turn=0
 	x=0
 	y=0
@@ -215,11 +201,9 @@ class TTT(MDFloatLayout):
 			self.ids.turn_label.text="Draw"
 		else:
 			pass
-class TttApp(MDApp):
+class TttApp(App):
 
 	def build(self):
 		return Builder.load_string(Kv)
-		
-
-if __name__ == '__main__':
-    TttApp().run()
+if __name__ == '__main__':		
+	TttApp().run()
