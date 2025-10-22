@@ -1,223 +1,84 @@
-from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivymd.uix.floatlayout import MDFloatLayout
+from kivy.app import App
+from kivy.core.window import Window
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from webview import WebView
+from os import listdir
+from textwrap import fill
 
-Kv='''
-TTT:
-<TTT>:
-	MDFloatLayout:
-		md_bg_color: "yellow"
-		MDGridLayout:
-			spacing : "5dp"
-			md_bg_color:"pink"
-			size_hint: .5 , .3
-			pos_hint: {"center_x": .5 ,"center_y": .7}
-			cols:3
-			rows:3
-			Button:
-				id:btn1
-				on_release:root.presser(self)
-			Button:
-				id:btn2
-				on_release:root.presser(self)
-			Button:
-				id:btn3
-				on_release:root.presser(self)
-			Button:
-				id:btn4
-				on_release:root.presser(self)
-			Button:
-				id:btn5
-				on_release:root.presser(self)
-			Button:
-				id:btn6
-				on_release:root.presser(self)
-			Button:
-				id:btn7
-				on_release:root.presser(self)
-			Button:
-				id:btn8
-				on_release:root.presser(self)
-			Button:
-				id:btn9
-				on_release:root.presser(self)
-	MDLabel:
-		id: turn_label
-		md_bg_color:"yellow"
-		pos_hint: {"center_x": .5 ,"center_y": .5}
-		size_hint: .4 ,.05
-		text:"Now X's turn"
-		halign:"center"
-		theme_text_color:"Custom"
-		text_color:"#2596be"
-	MDButton:
-        style: "filled"
-        height: "70dp"
-        theme_bg_color: "Custom"
-        md_bg_color: "red"
-        pos_hint: {"center_x": .5, "center_y": .4}
-        on_press:root.reset()
-        MDButtonText:
-            text: "Reset"
-            font_style: "Title"
-	MDLabel:
-		id: x_win
-		md_bg_color:"yellow"
-		pos_hint: {"center_x": .2 ,"center_y": .3}
-		size_hint: .2 ,.05
-		text:"X Wins: 0"
-		halign:"center"
-		theme_text_color:"Custom"
-		text_color:"#2596be"
-	MDLabel:
-		id: o_win
-		md_bg_color:"yellow"
-		pos_hint: {"center_x": .8 ,"center_y": .3}
-		size_hint: .2 ,.05
-		text:"O Wins: 0"
-		halign:"center"
-		theme_text_color:"Custom"
-		text_color:"#2596be"
-'''
-class TTT(MDFloatLayout):
-	turn=0
-	x=0
-	y=0
-	def reset(self):
-		self.ids.btn1.disabled=False
-		self.ids.btn2.disabled=False
-		self.ids.btn3.disabled=False
-		self.ids.btn4.disabled=False
-		self.ids.btn5.disabled=False
-		self.ids.btn6.disabled=False
-		self.ids.btn7.disabled=False
-		self.ids.btn8.disabled=False
-		self.ids.btn9.disabled=False
-		self.ids.btn1.text=""
-		self.ids.btn2.text=""
-		self.ids.btn3.text=""
-		self.ids.btn4.text=""
-		self.ids.btn5.text=""
-		self.ids.btn6.text=""
-		self.ids.btn7.text=""
-		self.ids.btn8.text=""
-		self.ids.btn9.text=""
-		self.ids.turn_label.text="Now X's turn"
-		self.turn=0
-	def disabler(self):
-		self.ids.btn1.disabled=True
-		self.ids.btn2.disabled=True
-		self.ids.btn3.disabled=True
-		self.ids.btn4.disabled=True
-		self.ids.btn5.disabled=True
-		self.ids.btn6.disabled=True
-		self.ids.btn7.disabled=True
-		self.ids.btn8.disabled=True
-		self.ids.btn9.disabled=True
-	def checker(self):
-		if self.ids.btn1.text=="X" and self.ids.btn2.text=="X" and self.ids.btn3.text== "X":
-			self.disabler()
-			self.ids.turn_label.text="X is win the Match"
-			self.x=self.x+1
-			self.ids.x_win.text="X Wins: "+str(self.x)
-		if self.ids.btn4.text=="X" and self.ids.btn5.text=="X" and self.ids.btn6.text== "X":
-			self.disabler()
-			self.ids.turn_label.text="X is win the Match"
-			self.x=self.x+1
-			self.ids.x_win.text="X Wins: "+str(self.x)
-		if self.ids.btn7.text=="X" and self.ids.btn8.text=="X" and self.ids.btn9.text== "X":
-			self.disabler()
-			self.ids.turn_label.text="X is win the Match"
-			self.x=self.x+1
-			self.ids.x_win.text="X Wins: "+str(self.x)
-		if self.ids.btn1.text=="X" and self.ids.btn4.text=="X" and self.ids.btn7.text== "X":
-			self.disabler()
-			self.ids.turn_label.text="X is win the Match"
-		if self.ids.btn2.text=="X" and self.ids.btn5.text=="X" and self.ids.btn8.text== "X":
-			self.disabler()
-			self.ids.turn_label.text="X is win the Match"
-			self.x=self.x+1
-			self.ids.x_win.text="X Wins: "+str(self.x)
-		if self.ids.btn3.text=="X" and self.ids.btn6.text=="X" and self.ids.btn9.text== "X":
-			self.disabler()
-			self.ids.turn_label.text="X is win the Match"
-			self.x=self.x+1
-			self.ids.x_win.text="X Wins: "+str(self.x)
-		if self.ids.btn1.text=="X" and self.ids.btn5.text=="X" and self.ids.btn9.text== "X":
-			self.disabler()
-			self.ids.turn_label.text="X is win the Match"
-			self.x=self.x+1
-			self.ids.x_win.text="X Wins: "+str(self.x)
-		if self.ids.btn3.text=="X" and self.ids.btn5.text=="X" and self.ids.btn7.text== "X":
-			self.disabler()
-			self.ids.turn_label.text="X is win the Match"
-			self.x=self.x+1
-			self.ids.x_win.text="X Wins: "+str(self.x)
-		if self.ids.btn1.text=="O" and self.ids.btn2.text=="O" and self.ids.btn3.text== "O":
-			self.disabler()
-			self.ids.turn_label.text="O is win the Match"
-			self.y=self.y+1
-			self.ids.o_win.text="O Wins: "+str(self.y)
-		if self.ids.btn4.text=="O" and self.ids.btn5.text=="O" and self.ids.btn6.text== "O":
-			self.disabler()
-			self.ids.turn_label.text="O is win the Match"
-			self.y=self.y+1
-			self.ids.o_win.text="O Wins: "+str(self.y)
-		if self.ids.btn7.text=="O" and self.ids.btn8.text=="O" and self.ids.btn9.text== "O":
-			self.disabler()
-			self.ids.turn_label.text="O is win the Match"
-			self.y=self.y+1
-			self.ids.o_win.text="O Wins: "+str(self.y)
-		if self.ids.btn1.text=="O" and self.ids.btn4.text=="O" and self.ids.btn7.text== "O":
-			self.disabler()
-			self.ids.turn_label.text="O is win the Match"
-			self.y=self.y+1
-			self.ids.o_win.text="O Wins: "+str(self.y)
-		if self.ids.btn2.text=="O" and self.ids.btn5.text=="O" and self.ids.btn8.text== "O":
-			self.disabler()
-			self.ids.turn_label.text="O is win the Match"
-			self.y=self.y+1
-			self.ids.o_win.text="O Wins: "+str(self.y)
-		if self.ids.btn3.text=="O" and self.ids.btn6.text=="O" and self.ids.btn9.text== "O":
-			self.disabler()
-			self.ids.turn_label.text="O is win the Match"
-			self.y=self.y+1
-			self.ids.o_win.text="O Wins: "+str(self.y)
-		if self.ids.btn1.text=="O" and self.ids.btn5.text=="O" and self.ids.btn9.text== "O":
-			self.disabler()
-			self.ids.turn_label.text="O is win the Match"
-			self.y=self.y+1
-			self.ids.o_win.text="O Wins: "+str(self.y)
-		if self.ids.btn3.text=="O" and self.ids.btn5.text=="O" and self.ids.btn7.text== "O":
-			self.disabler()
-			self.ids.turn_label.text="O is win the Match"
-			self.y=self.y+1
-			self.ids.o_win.text="O Wins: "+str(self.y)
-		else:
-			pass
-	def presser(self,btn):
-		btn.font_size="50dp"
-		if self.turn==0:
-			btn.text="X"
-			self.turn=1
-			self.ids.turn_label.text="Now 0's turn"
-			btn.disabled= True
-			self.draw()
-			self.checker()
-		else:
-			btn.text="O"
-			self.turn=0
-			self.ids.turn_label.text="Now X's turn"
-			btn.disabled= True
-			self.draw()
-			self.checker()
-	def draw(self):
-		if self.ids.btn1.disabled==self.ids.btn2.disabled==self.ids.btn3.disabled==self.ids.btn4.disabled==self.ids.btn5.disabled==self.ids.btn6.disabled==self.ids.btn7.disabled==self.ids.btn8.disabled==self.ids.btn9.disabled==True and self.ids.btn1.text!="" and self.ids.btn2.text!="" and self.ids.btn3.text!="" and self.ids.btn4.text!="" and self.ids.btn5.text!="" and self.ids.btn6.text!="" and self.ids.btn7.text!="" and self.ids.btn8.text!="" and self.ids.btn9.text!="":
-			self.ids.turn_label.text="Draw"
-		else:
-			pass
-class TttApp(MDApp):
-	def build(self):
-		return Builder.load_string(Kv)
-if __name__ == '__main__':		
-	TttApp().run()
+class BrowserApp(App):
+    def build(self):
+        self._create_local_file()
+        self.browser = None
+        b1 = Button(text='Tap for Google.\nBack button/gesture to return.',
+                    on_press=self.view_google)
+        b2 = Button(text='Tap for local file.\nBack button/gesture to return.',
+                    on_press=self.view_local_file)
+        b3 = Button(text='List downloads',
+                    on_press=self.view_downloads)
+        self.label = Label(text='')
+        box = BoxLayout(orientation='vertical')
+        box.add_widget(b1)
+        box.add_widget(b2)
+        box.add_widget(b3)
+        box.add_widget(self.label)
+        return box
+        
+    def view_google(self,b):
+        self.browser = WebView('https://www.google.com',
+                               enable_javascript = True,
+                               enable_downloads = True,
+                               enable_zoom = True)
+        
+    def view_local_file(self,b):
+        self.browser = WebView('file://'+self.filename)
+
+    def view_downloads(self,b):
+        if self.browser:
+            d = self.browser.downloads_directory()
+            self.label.text = fill(d,40) + '\n'
+            l = listdir(d)
+            if l:
+                for f in l:
+                    self.label.text += f + '\n'
+            else:
+                self.label.text = 'No files downloaded'
+        else:
+            self.label.text = 'Open a browser first'
+                
+    def on_pause(self): 
+        if self.browser:
+            self.browser.pause()
+        return True
+
+    def on_resume(self):
+        if self.browser:
+            self.browser.resume()
+        pass
+
+    def _create_local_file(self):
+        # Create a file for testing
+        from android.storage import app_storage_path
+        from jnius import autoclass
+        from os.path import join, exists
+        from os import mkdir
+        
+        Environment = autoclass('android.os.Environment')
+        path = join(app_storage_path(), Environment.DIRECTORY_DOCUMENTS)
+        if not exists(path):
+            mkdir(path)
+        self.filename = join(path,'from_space.html')
+        with open(self.filename, "w") as f:
+            f.write("<html>\n")
+            f.write(" <head>\n")
+            f.write(" </head>\n")
+            f.write(" <body>\n")
+            f.write("  <h1>Greetings Earthlings<h1>\n")
+            f.write(" </body>\n")
+            f.write("</html>\n")
+
+BrowserApp().run()
+
+
+
