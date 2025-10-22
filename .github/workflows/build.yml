@@ -2,7 +2,7 @@ name: Kivy Android Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ Google ]
 
 jobs:
   build:
