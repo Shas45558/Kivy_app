@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = Tic Tac Toe
+title = Internet
 
 # (str) Package name
-package.name = ttt
+package.name = int
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.test
@@ -38,6 +38,7 @@ version = 0.1
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 
+android.permissions = INTERNET
 requirements = python3,
     kivy,
     https://github.com/kivymd/KivyMD/archive/master.zip,
